@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>Uhuru.ExpressionBuilder</AssemblyName>
+    <RootNamespace>Uhuru.ExpressionBuilder</RootNamespace>
+    <Authors>Kitsklip</Authors>
+    <Product>ExpressionBuilder</Product>
+    <PackageProjectUrl>https://github.com/KitsKlip/ExpressionBuilder</PackageProjectUrl>
+    <PackageLicenseExpression>https://github.com/KitsKlip/ExpressionBuilder/blob/master/LICENSE</PackageLicenseExpression>
+    <Description>A package that helps to create expressions dynamically for unknown type</Description>
+    <RepositoryUrl>https://github.com/KitsKlip/ExpressionBuilder.git</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>C#, Expressions, lambda</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+  </ItemGroup>
+
+</Project>
