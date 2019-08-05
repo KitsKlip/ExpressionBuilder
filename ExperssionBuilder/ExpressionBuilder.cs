@@ -21,17 +21,34 @@ namespace Uhuru.ExpressionBuilder
 
             if (propInfo.PropertyType == typeof(string))
             {
-                propertyExp = Expression.Call(propertyExp, "ToUpper", null, null);
-                var method = propInfo.PropertyType.GetMethod(filter, new[] { propInfo.PropertyType });
-                if (method == null)
-                    throw new ArgumentException($"{filter} could not be found");
-
-                searchCriteria = propertyValue.AsString()?.ToUpper().GetConstant();
-                return Expression.Lambda<Func<TEntity, bool>>(Expression.Call(propertyExp, method, searchCriteria), argParam);
+                return GetStringExpression<TEntity, TPropertyValue>(propertyValue, filterType, argParam, propInfo, propertyExp, filter);
             }
 
             var propertyExpression = propertyExp.GetPropertyExpressionForNonStringProperty(filterType, searchCriteria);
             return Expression.Lambda<Func<TEntity, bool>>(propertyExpression, argParam);
+        }
+
+        private static Expression<Func<TEntity, bool>> GetStringExpression<TEntity, TPropertyValue>(TPropertyValue propertyValue, FilterType filterType, ParameterExpression argParam, PropertyInfo propInfo, Expression propertyExp, string filter)
+        {
+            propertyExp = Expression.Call(propertyExp, "ToUpper", null, null);
+            var searchCriteria = propertyValue.AsString()?.ToUpper().GetConstant();
+
+            var method = propInfo.PropertyType.GetMethod(filter, new[] { propInfo.PropertyType });
+            if (method == null)
+            {
+                if (filterType == FilterType.NotEqual)
+                {
+                    propertyExp = Expression.NotEqual(propertyExp, searchCriteria);
+                    return Expression.Lambda<Func<TEntity, bool>>(propertyExp, argParam);
+                }
+                else
+                {
+                    throw new ArgumentException($"{filter} could not be found");
+                }
+            }
+
+
+            return Expression.Lambda<Func<TEntity, bool>>(Expression.Call(propertyExp, method, searchCriteria), argParam);
         }
 
         private static void ValidatePropertyAndValueTypesMatch<TPropertyValue>(string propertyName, TPropertyValue propertyValue, PropertyInfo propInfo)
