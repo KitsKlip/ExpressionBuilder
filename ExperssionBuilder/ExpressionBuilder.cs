@@ -30,6 +30,7 @@ namespace Uhuru.ExpressionBuilder
 
         private static Expression<Func<TEntity, bool>> GetStringExpression<TEntity, TPropertyValue>(TPropertyValue propertyValue, FilterType filterType, ParameterExpression argParam, PropertyInfo propInfo, Expression propertyExp, string filter)
         {
+            var nullCheck = Expression.NotEqual(propertyExp, Expression.Constant(null, typeof(object)));
             propertyExp = Expression.Call(propertyExp, "ToUpper", null, null);
             var searchCriteria = propertyValue.AsString()?.ToUpper().GetConstant();
 
@@ -47,8 +48,10 @@ namespace Uhuru.ExpressionBuilder
                 }
             }
 
+            var notNullAndEqual = Expression.AndAlso(nullCheck, Expression.Call(propertyExp, method, searchCriteria));
 
-            return Expression.Lambda<Func<TEntity, bool>>(Expression.Call(propertyExp, method, searchCriteria), argParam);
+            //return Expression.Lambda<Func<TEntity, bool>>(Expression.Call(propertyExp, method, searchCriteria), argParam);
+            return Expression.Lambda<Func<TEntity, bool>>(notNullAndEqual, argParam);
         }
 
         private static void ValidatePropertyAndValueTypesMatch<TPropertyValue>(string propertyName, TPropertyValue propertyValue, PropertyInfo propInfo)

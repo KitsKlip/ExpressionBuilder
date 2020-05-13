@@ -69,10 +69,10 @@ namespace ExpressionBuilderTests
         [TestCase(FilterType.LessThan, "entity => (entity.FloatField < 72)", FakeObject.FloatPropertyName, FakeObject.FloatDefaultValue)]
         [TestCase(FilterType.LessThanOrEqual, "entity => (entity.FloatField <= 72)", FakeObject.FloatPropertyName, FakeObject.FloatDefaultValue)]
         /*string*/
-        [TestCase(FilterType.Equals, "entity => entity.StringField.ToUpper().Equals(\"STRING FIELD VALUE\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue)]
-        [TestCase(FilterType.Contains, "entity => entity.StringField.ToUpper().Contains(\"STRING FIELD VALUE\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue)]
-        [TestCase(FilterType.EndsWith, "entity => entity.StringField.ToUpper().EndsWith(\"STRING FIELD VALUE\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue)]
-        [TestCase(FilterType.StartsWith, "entity => entity.StringField.ToUpper().StartsWith(\"STRING FIELD VALUE\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue)]
+        [TestCase(FilterType.Equals, "entity => ((entity.StringField != null) AndAlso entity.StringField.ToUpper().Equals(\"STRING FIELD VALUE\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue)]
+        [TestCase(FilterType.Contains, "entity => ((entity.StringField != null) AndAlso entity.StringField.ToUpper().Contains(\"STRING FIELD VALUE\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue)]
+        [TestCase(FilterType.EndsWith, "entity => ((entity.StringField != null) AndAlso entity.StringField.ToUpper().EndsWith(\"STRING FIELD VALUE\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue)]
+        [TestCase(FilterType.StartsWith, "entity => ((entity.StringField != null) AndAlso entity.StringField.ToUpper().StartsWith(\"STRING FIELD VALUE\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue)]
         [TestCase(FilterType.NotEqual, "entity => (entity.StringField.ToUpper() != \"STRING FIELD VALUE\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue)]
         /*bool*/
         [TestCase(FilterType.Equals, "entity => (entity.BoolField == True)", FakeObject.BoolPropertyName, FakeObject.BoolDefaultValue)]
