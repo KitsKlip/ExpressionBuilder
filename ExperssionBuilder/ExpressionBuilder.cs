@@ -30,7 +30,9 @@ namespace Uhuru.ExpressionBuilder
 
         private static Expression<Func<TEntity, bool>> GetStringExpression<TEntity, TPropertyValue>(TPropertyValue propertyValue, FilterType filterType, ParameterExpression argParam, PropertyInfo propInfo, Expression propertyExp, string filter)
         {
-            var nullCheck = Expression.NotEqual(propertyExp, Expression.Constant(null, typeof(object)));
+            var notNullCheck = Expression.NotEqual(propertyExp, Expression.Constant(null, typeof(object)));
+            var nullCheck = Expression.Equal(propertyExp, Expression.Constant(null, typeof(object)));
+
             propertyExp = Expression.Call(propertyExp, "ToUpper", null, null);
             var searchCriteria = propertyValue.AsString()?.ToUpper().GetConstant();
 
@@ -40,17 +42,14 @@ namespace Uhuru.ExpressionBuilder
                 if (filterType == FilterType.NotEqual)
                 {
                     propertyExp = Expression.NotEqual(propertyExp, searchCriteria);
+                    propertyExp = Expression.Or(nullCheck, propertyExp);
                     return Expression.Lambda<Func<TEntity, bool>>(propertyExp, argParam);
                 }
-                else
-                {
-                    throw new ArgumentException($"{filter} could not be found");
-                }
+                 
+                throw new ArgumentException($"{filter} could not be found");
             }
 
-            var notNullAndEqual = Expression.AndAlso(nullCheck, Expression.Call(propertyExp, method, searchCriteria));
-
-            //return Expression.Lambda<Func<TEntity, bool>>(Expression.Call(propertyExp, method, searchCriteria), argParam);
+            var notNullAndEqual = Expression.AndAlso(notNullCheck, Expression.Call(propertyExp, method, searchCriteria));
             return Expression.Lambda<Func<TEntity, bool>>(notNullAndEqual, argParam);
         }
 
