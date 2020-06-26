@@ -81,18 +81,18 @@ namespace ExpressionBuilderTests
 
 
         /*ToUpperWithNullCheck*/
-        [TestCase(FilterType.Equals, "entity => entity.StringField.Equals(\"STRING FIELD VALUE\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparison)]
-        [TestCase(FilterType.Contains, "entity => entity.StringField.Contains(\"STRING FIELD VALUE\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparison)]
-        [TestCase(FilterType.EndsWith, "entity => entity.StringField.EndsWith(\"STRING FIELD VALUE\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparison)]
-        [TestCase(FilterType.StartsWith, "entity => entity.StringField.StartsWith(\"STRING FIELD VALUE\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparison)]
-        [TestCase(FilterType.NotEqual, "entity => (entity.StringField != \"STRING FIELD VALUE\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparison)]
+        [TestCase(FilterType.Equals, "entity => entity.StringField.Equals(\"String Field Value\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparison)]
+        [TestCase(FilterType.Contains, "entity => entity.StringField.Contains(\"String Field Value\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparison)]
+        [TestCase(FilterType.EndsWith, "entity => entity.StringField.EndsWith(\"String Field Value\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparison)]
+        [TestCase(FilterType.StartsWith, "entity => entity.StringField.StartsWith(\"String Field Value\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparison)]
+        [TestCase(FilterType.NotEqual, "entity => (entity.StringField != \"String Field Value\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparison)]
 
         /*DirectComparisonWithNullCheck*/
-        [TestCase(FilterType.Equals, "entity => ((entity.StringField != null) AndAlso entity.StringField.Equals(\"STRING FIELD VALUE\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparisonWithNullCheck)]
-        [TestCase(FilterType.Contains, "entity => ((entity.StringField != null) AndAlso entity.StringField.Contains(\"STRING FIELD VALUE\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparisonWithNullCheck)]
-        [TestCase(FilterType.EndsWith, "entity => ((entity.StringField != null) AndAlso entity.StringField.EndsWith(\"STRING FIELD VALUE\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparisonWithNullCheck)]
-        [TestCase(FilterType.StartsWith, "entity => ((entity.StringField != null) AndAlso entity.StringField.StartsWith(\"STRING FIELD VALUE\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparisonWithNullCheck)]
-        [TestCase(FilterType.NotEqual, "entity => ((entity.StringField == null) Or (entity.StringField != \"STRING FIELD VALUE\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparisonWithNullCheck)]
+        [TestCase(FilterType.Equals, "entity => ((entity.StringField != null) AndAlso entity.StringField.Equals(\"String Field Value\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparisonWithNullCheck)]
+        [TestCase(FilterType.Contains, "entity => ((entity.StringField != null) AndAlso entity.StringField.Contains(\"String Field Value\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparisonWithNullCheck)]
+        [TestCase(FilterType.EndsWith, "entity => ((entity.StringField != null) AndAlso entity.StringField.EndsWith(\"String Field Value\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparisonWithNullCheck)]
+        [TestCase(FilterType.StartsWith, "entity => ((entity.StringField != null) AndAlso entity.StringField.StartsWith(\"String Field Value\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparisonWithNullCheck)]
+        [TestCase(FilterType.NotEqual, "entity => ((entity.StringField == null) Or (entity.StringField != \"String Field Value\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.DirectComparisonWithNullCheck)]
         /*ToUpper*/
         [TestCase(FilterType.Equals, "entity => entity.StringField.ToUpper().Equals(\"STRING FIELD VALUE\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToUpper)]
         [TestCase(FilterType.Contains, "entity => entity.StringField.ToUpper().Contains(\"STRING FIELD VALUE\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToUpper)]
@@ -106,17 +106,17 @@ namespace ExpressionBuilderTests
         [TestCase(FilterType.StartsWith, "entity => ((entity.StringField != null) AndAlso entity.StringField.ToUpper().StartsWith(\"STRING FIELD VALUE\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToUpperWithNullCheck)]
         [TestCase(FilterType.NotEqual, "entity => ((entity.StringField == null) Or (entity.StringField.ToUpper() != \"STRING FIELD VALUE\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToUpperWithNullCheck)]
         /*ToLower*/
-        [TestCase(FilterType.Equals, "entity => entity.StringField.ToLower().Equals(\"STRING FIELD VALUE\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLower)]
-        [TestCase(FilterType.Contains, "entity => entity.StringField.ToLower().Contains(\"STRING FIELD VALUE\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLower)]
-        [TestCase(FilterType.EndsWith, "entity => entity.StringField.ToLower().EndsWith(\"STRING FIELD VALUE\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLower)]
-        [TestCase(FilterType.StartsWith, "entity => entity.StringField.ToLower().StartsWith(\"STRING FIELD VALUE\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLower)]
-        [TestCase(FilterType.NotEqual, "entity => (entity.StringField.ToLower() != \"STRING FIELD VALUE\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLower)]
+        [TestCase(FilterType.Equals, "entity => entity.StringField.ToLower().Equals(\"string field value\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLower)]
+        [TestCase(FilterType.Contains, "entity => entity.StringField.ToLower().Contains(\"string field value\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLower)]
+        [TestCase(FilterType.EndsWith, "entity => entity.StringField.ToLower().EndsWith(\"string field value\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLower)]
+        [TestCase(FilterType.StartsWith, "entity => entity.StringField.ToLower().StartsWith(\"string field value\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLower)]
+        [TestCase(FilterType.NotEqual, "entity => (entity.StringField.ToLower() != \"string field value\")", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLower)]
         /*ToLowerWithNullCheck*/
-        [TestCase(FilterType.Equals, "entity => ((entity.StringField != null) AndAlso entity.StringField.ToLower().Equals(\"STRING FIELD VALUE\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLowerWithNullCheck)]
-        [TestCase(FilterType.Contains, "entity => ((entity.StringField != null) AndAlso entity.StringField.ToLower().Contains(\"STRING FIELD VALUE\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLowerWithNullCheck)]
-        [TestCase(FilterType.EndsWith, "entity => ((entity.StringField != null) AndAlso entity.StringField.ToLower().EndsWith(\"STRING FIELD VALUE\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLowerWithNullCheck)]
-        [TestCase(FilterType.StartsWith, "entity => ((entity.StringField != null) AndAlso entity.StringField.ToLower().StartsWith(\"STRING FIELD VALUE\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLowerWithNullCheck)]
-        [TestCase(FilterType.NotEqual, "entity => ((entity.StringField == null) Or (entity.StringField.ToLower() != \"STRING FIELD VALUE\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLowerWithNullCheck)]
+        [TestCase(FilterType.Equals, "entity => ((entity.StringField != null) AndAlso entity.StringField.ToLower().Equals(\"string field value\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLowerWithNullCheck)]
+        [TestCase(FilterType.Contains, "entity => ((entity.StringField != null) AndAlso entity.StringField.ToLower().Contains(\"string field value\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLowerWithNullCheck)]
+        [TestCase(FilterType.EndsWith, "entity => ((entity.StringField != null) AndAlso entity.StringField.ToLower().EndsWith(\"string field value\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLowerWithNullCheck)]
+        [TestCase(FilterType.StartsWith, "entity => ((entity.StringField != null) AndAlso entity.StringField.ToLower().StartsWith(\"string field value\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLowerWithNullCheck)]
+        [TestCase(FilterType.NotEqual, "entity => ((entity.StringField == null) Or (entity.StringField.ToLower() != \"string field value\"))", FakeObject.StringPropertyName, FakeObject.StringTimeDefaultValue, StringExpressionsOptions.ToLowerWithNullCheck)]
         public void StringTests<T>(
             FilterType filterType,
             string expectedExpressions,
