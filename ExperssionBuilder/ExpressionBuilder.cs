@@ -71,12 +71,24 @@ namespace Uhuru.ExpressionBuilder
             var notNullCheck = Expression.NotEqual(propertyExp, Expression.Constant(null, typeof(object)));
             var nullCheck = Expression.Equal(propertyExp, Expression.Constant(null, typeof(object)));
 
+            var searchValue = propertyValue.AsString();
+
             if (!string.IsNullOrWhiteSpace(propertyChangeMethod))
             {
                 propertyExp = Expression.Call(propertyExp, propertyChangeMethod, null, null);
+
+                switch (propertyChangeMethod)
+                {
+                    case ToLower:
+                        searchValue = searchValue.ToLowerInvariant();
+                        break;
+                    case ToUpper:
+                        searchValue = searchValue.ToUpperInvariant();
+                        break;
+                }
             }
             
-            var searchCriteria = propertyValue.AsString().ToUpper().GetConstant();
+            var searchCriteria = searchValue.GetConstant();
 
             var method = propInfo.PropertyType.GetMethod(filter, new[] { propInfo.PropertyType });
             if (method == null)
