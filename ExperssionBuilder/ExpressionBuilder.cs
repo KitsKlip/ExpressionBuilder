@@ -144,9 +144,6 @@ namespace Uhuru.ExpressionBuilder
                 throw new ArgumentException($"Type of the property [{propertyName} => {propInfo.PropertyType.Name}] and the value supplied ['{propertyValue}' => {propertyValueType.Name}] are not the same");
         }
 
-        //private static PropertyInfo GetProperty<TEntity>(this string propertyName)
-        //    =>  typeof(TEntity).GetProperty(propertyName);
-
         private static PropertyInfo GetProperty<TEntity>(this string propertyName)
          => GetProperty(typeof(TEntity), propertyName);
 
@@ -156,7 +153,7 @@ namespace Uhuru.ExpressionBuilder
 
         private static Expression<Func<TEntity, bool>> GetNavigationPropertyExpression<TEntity, TPropertyValue>(Expression parameter, TPropertyValue searchValue, FilterType filterType, ExpressionsBuilderSettings expressionsBuilderSettings = null, params string[] properties)
         {
-            Expression<Func<TEntity, bool>> resultExpression = null;
+            Expression<Func<TEntity, bool>> resultExpression;
             Expression navigationPropertyPredicate;
             var providedExpression = parameter;
             var filter = filterType.GetDescription();
@@ -168,7 +165,7 @@ namespace Uhuru.ExpressionBuilder
                 var isCollection = typeof(IEnumerable).IsAssignableFrom(providedExpression.Type);
                 //if it´s a collection we later need to use the predicate in the methodexpressioncall
                 Expression childParameter;
-                Type childType = null;
+                Type childType;
                 if (isCollection)
                 {
                     childType = providedExpression.Type.GetGenericArguments()[0];
@@ -188,7 +185,7 @@ namespace Uhuru.ExpressionBuilder
                     //build methodexpressioncall
                     var anyMethod = typeof(Enumerable).GetMethods().Single(m => m.Name == "Any" && m.GetParameters().Length == 2);
                     anyMethod = anyMethod.MakeGenericMethod(childType);
-                    var exp = navigationPropertyPredicate.ReduceExtensions();
+                    //var exp = navigationPropertyPredicate.ReduceExtensions();
                     navigationPropertyPredicate = Expression.Call(anyMethod, parameter, navigationPropertyPredicate);
                     resultExpression = MakeLambda<TEntity>(providedExpression, navigationPropertyPredicate);
                 }
@@ -216,31 +213,15 @@ namespace Uhuru.ExpressionBuilder
 
                     navigationPropertyPredicate = GetStringExpression(searchValue, filterType, childProperty, propertyExp, filter, expressionsBuilderSettings);
                     resultExpression = Expression.Lambda<Func<TEntity, bool>>(navigationPropertyPredicate, resultParameter);
-
-                    //Expression propertyExp = Expression.Property(providedExpression, childProperty);
-                    //propertyExp = Expression.Call(propertyExp, "ToUpper", null, null);
-                    //var method = childProperty.PropertyType.GetMethod(filterType.GetDescription(), new[] { childProperty.PropertyType });
-                    //navigationPropertyPredicate = Expression.Call(propertyExp, method, searchCriteria);
-
-                    //var resultParameterVisitor = new ParameterVisitor();
-                    //resultParameterVisitor.Visit(parameter);
-                    //ParameterExpression resultParameter = (ParameterExpression)resultParameterVisitor.Parameter;
-
-                    //resultExpression = Expression.Lambda<Func<TEntity, bool>>(navigationPropertyPredicate, resultParameter);
                 }
                 else
                 {
                     var left = Expression.Property(parameter, childProperty);
-
-                    //var searchCriteria = propertyValue.GetConstant();
-                    var right = left.GetPropertyExpressionForNonStringProperty(filterType, searchCriteria);
-                    //var right = ExpressionBuilder.GetPropertyExpressionForNonStringProperty(childProperty.PropertyType, left, filterType, searchCriteria);
-                    navigationPropertyPredicate = right;// Expression.Equal(left, right);
+                    navigationPropertyPredicate = left.GetPropertyExpressionForNonStringProperty(filterType, searchCriteria);
 
                     var resultParameterVisitor = new ParameterVisitor();
                     resultParameterVisitor.Visit(parameter);
-                    ParameterExpression resultParameter = (ParameterExpression)resultParameterVisitor.Parameter;
-
+                    var resultParameter = (ParameterExpression)resultParameterVisitor.Parameter;
                     resultExpression = Expression.Lambda<Func<TEntity, bool>>(navigationPropertyPredicate, resultParameter);
                 }
             }
@@ -311,20 +292,6 @@ namespace Uhuru.ExpressionBuilder
                 default:
                     throw new ArgumentOutOfRangeException(nameof(filterType), filterType, null);
             }
-        }
-    }
-
-    internal class ParameterVisitor : ExpressionVisitor
-    {
-        public Expression Parameter
-        {
-            get;
-            private set;
-        }
-        protected override Expression VisitParameter(ParameterExpression node)
-        {
-            Parameter = node;
-            return node;
         }
     }
 }
