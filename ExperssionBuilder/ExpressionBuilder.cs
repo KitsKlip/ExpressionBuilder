@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Linq;
@@ -166,7 +166,7 @@ namespace Uhuru.ExpressionBuilder
                 //build path
                 providedExpression = Expression.Property(parameter, properties[0]);
                 var isCollection = typeof(IEnumerable).IsAssignableFrom(providedExpression.Type);
-                //if it´s a collection we later need to use the predicate in the methodexpressioncall
+                //if it�s a collection we later need to use the predicate in the methodexpressioncall
                 Expression childParameter;
                 Type childType = null;
                 if (isCollection)
