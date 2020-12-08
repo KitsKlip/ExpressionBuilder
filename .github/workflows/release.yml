@@ -25,4 +25,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: Uhuru.ExpressionBuilder
-        path: ./ExpressionBuilder/ExperssionBuilder/bin/Release/Uhuru.ExpressionBuilder.${{ github.event.release.tag_name }}.nupkg
+        path: ./ExpressionBuilder/bin/Release/Uhuru.ExpressionBuilder.${{ github.event.release.tag_name }}.nupkg
