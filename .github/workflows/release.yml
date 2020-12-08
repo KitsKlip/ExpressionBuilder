@@ -21,8 +21,5 @@ jobs:
     - name: List all Files
       shell: pwsh
       run: get-childitem -file  -d 3 -r
-    - name: Archive NuGet Package
-      uses: actions/upload-artifact@v1
-      with:
-        name: Uhuru.ExpressionBuilder        
-        path: ExpressionBuilder/bin/Release/Uhuru.ExpressionBuilder.${{ github.event.release.tag_name }}.nupkg
+    - name: Publish Nuget Package
+      run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGETAPIKEY }} --source https://api.nuget.org/v3/index.json --no-symbols true
