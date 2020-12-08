@@ -16,7 +16,7 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Create NuGet Package
-      run: dotnet pack ExperssionBuilder/ExpressionBuilder.csproj -c Release /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/KitsKlip/ExpressionBuilder/tags/${{ github.event.release.tag_name }}"      
+      run: dotnet pack -c Release /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/KitsKlip/ExpressionBuilder/tags/${{ github.event.release.tag_name }}"      
     - name: Archive NuGet Package
       uses: actions/upload-artifact@v1
       with:
