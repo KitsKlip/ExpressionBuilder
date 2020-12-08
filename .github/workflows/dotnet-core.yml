@@ -18,11 +18,8 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Install dependencies
-      run: dotnet restore ExperssionBuilder.sln
-      working-directory: ExperssionBuilder
+      run: dotnet restore ExperssionBuilder.sln      
     - name: Build
-      run: dotnet build ExperssionBuilder.sln --configuration Release --no-restore
-      working-directory: ExperssionBuilder
+      run: dotnet build ExperssionBuilder.sln --configuration Release --no-restore      
     - name: Test
       run: dotnet test ExperssionBuilder.sln --no-restore --verbosity normal
-      working-directory: ExperssionBuilder
