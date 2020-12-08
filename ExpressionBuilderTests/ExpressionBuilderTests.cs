@@ -21,15 +21,17 @@ namespace ExpressionBuilderTests
             => RunTest(filterType, FakeObject.GuidPropertyName, FakeObject.GuidDefaultValue, expectedExpressions);
 
         [Test]
-        [TestCase(FilterType.Equals, "entity => (entity.DateTimeField == 2019-01-02 03:04:05)")]
-        [TestCase(FilterType.NotEqual, "entity => (entity.DateTimeField != 2019-01-02 03:04:05)")]
-        [TestCase(FilterType.GreaterThan, "entity => (entity.DateTimeField > 2019-01-02 03:04:05)")]
-        [TestCase(FilterType.GreaterThanOrEqual, "entity => (entity.DateTimeField >= 2019-01-02 03:04:05)")]
-        [TestCase(FilterType.LessThan, "entity => (entity.DateTimeField < 2019-01-02 03:04:05)")]
-        [TestCase(FilterType.LessThanOrEqual, "entity => (entity.DateTimeField <= 2019-01-02 03:04:05)")]
-        public void DateTime_Expression_Tests(FilterType filterType, string expectedExpressions)
-            => RunTest(filterType, FakeObject.DateTimePropertyName, FakeObject.DateTimeDefaultValue,
-                expectedExpressions);
+        [TestCase(FilterType.Equals, "entity => (entity.DateTimeField == {0})")]
+        [TestCase(FilterType.NotEqual, "entity => (entity.DateTimeField != {0})")]
+        [TestCase(FilterType.GreaterThan, "entity => (entity.DateTimeField > {0})")]
+        [TestCase(FilterType.GreaterThanOrEqual, "entity => (entity.DateTimeField >= {0})")]
+        [TestCase(FilterType.LessThan, "entity => (entity.DateTimeField < {0})")]
+        [TestCase(FilterType.LessThanOrEqual, "entity => (entity.DateTimeField <= {0})")]
+        public void DateTime_Expression_Tests(FilterType filterType, string expectedExpressionTemplate)
+        {
+            var expectedExpression = string.Format(expectedExpressionTemplate, FakeObject.DateTimeDefaultValue);
+            RunTest(filterType, FakeObject.DateTimePropertyName, FakeObject.DateTimeDefaultValue, expectedExpression);
+        }
 
         [Test]
         /*long*/
