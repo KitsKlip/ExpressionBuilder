@@ -16,4 +16,5 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Create NuGet Package
-      run: dotnet pack -c Release /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/KitsKlip/ExpressionBuilder/tags/${{ github.event.release.tag_name }}"
+      run: dotnet pack ExpressionBuilder.csproj -c Release /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/KitsKlip/ExpressionBuilder/tags/${{ github.event.release.tag_name }}"
+      working-directory: ExperssionBuilder\ExperssionBuilder
