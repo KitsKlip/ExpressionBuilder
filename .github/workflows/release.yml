@@ -16,13 +16,13 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Build
-      run: dotnet build ExpressionBuilder.csproj -c Release -v diag
+      run: dotnet build ExpressionBuilder.csproj -c Release -v n
       working-directory: ExperssionBuilder
     - name: Create NuGet Package
-      run: dotnet pack ExpressionBuilder.csproj -c Release -v diag --no-build /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/KitsKlip/ExpressionBuilder/tags/${{ github.event.release.tag_name }}"
+      run: dotnet pack ExpressionBuilder.csproj -c Release -v n --no-build --output 'nupkgs' /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/KitsKlip/ExpressionBuilder/tags/${{ github.event.release.tag_name }}"
       working-directory: ExperssionBuilder
     - name: Archive NuGet Package
       uses: actions/upload-artifact@v1
       with:
         name: Uhuru.ExpressionBuilder
-        path: ./ExpressionBuilder/bin/Release/Uhuru.ExpressionBuilder.${{ github.event.release.tag_name }}.nupkg
+        path: ./nupkgs/Uhuru.ExpressionBuilder.${{ github.event.release.tag_name }}.nupkg
