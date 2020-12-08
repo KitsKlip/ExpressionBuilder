@@ -33,4 +33,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: Uhuru.ExpressionBuilder
-        path: /ExperssionBuilder/nupkgs/Uhuru.ExpressionBuilder.1.1.1.8-aplha.nupkg
+        path: ExperssionBuilder/nupkgs/Uhuru.ExpressionBuilder.1.1.1.8-aplha.nupkg        
