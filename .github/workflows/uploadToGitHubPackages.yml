@@ -1,9 +1,9 @@
 
-name: Release to Nuget
+name: Release to Nuget to GitHub
 
 on:  
   push:
-    types: [ivomp-patch-1]
+    branches: [ivomp-patch-1]
 
 jobs:
   build:
